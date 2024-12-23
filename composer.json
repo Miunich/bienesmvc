@@ -1,0 +1,21 @@
+{
+    "name": "sergio/bienesraices_inicio",
+    "description": "Creando un proyecto con POO",
+    "type": "proyect",
+    "autoload": {
+        "psr-4": {
+            "Model\\": "./models",
+            "MVC\\": "MVC/",
+            "Controllers\\": "./controllers"
+        }
+    },
+    "authors": [
+        {
+            "name": "Miunich",
+            "email": "correo@correo.com"
+        }
+    ],
+    "require": {
+        "intervention/image": "^3.9"
+    }
+}
