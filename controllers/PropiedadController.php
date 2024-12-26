@@ -14,8 +14,13 @@ class PropiedadController{
         ]);
     }
 
-    public static function crear(){
-        echo 'Crear Propiedad';
+    public static function crear(Router $router){
+        $propiedades = Propiedad::all();
+        $resultado = null;
+        $router->render('propiedades/admin',[
+            'propiedades' => $propiedades,
+            'resultado' => $resultado
+        ]);
     }
 
     public static function actualizar(){

@@ -1,3 +1,4 @@
+
 <main class="contenedor seccion">
     <h1>Administrador de Bienes Raíces</h1>
     <?php
