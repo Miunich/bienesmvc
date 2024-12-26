@@ -41,7 +41,7 @@ class Router
     {
         
         foreach ($datos as $key => $value) {
-            $$key = $value;//variable de variables
+            $$key = $value;//$$key variable de variables
         }
         ob_start();//guarda el contenido en un buffer
         include __DIR__ . "/../views/$view.php";
