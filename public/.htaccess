@@ -6,3 +6,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 # De lo contrario, redirige todas las solicitudes a index.php
 RewriteRule ^ index.php [L]
+
+

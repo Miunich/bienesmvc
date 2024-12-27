@@ -7,8 +7,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // Conectar a la base de datos
 $db = conectarDB();
 
-
+use Model\Vendedor;
 use Model\propiedad;
 
 Propiedad::setDB($db);
+Vendedor::setDB($db);
 

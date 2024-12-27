@@ -14,6 +14,12 @@ class Router
         // debuguear($this->rutasGET);
     }
 
+    public function post($url, $fn)
+    {
+        $this->rutasPOST[$url] = $fn;
+        // debuguear($this->rutasGET);
+    }
+
     public function comprobarRutas()
     {
         $urlActual = $_SERVER['REQUEST_URI'] ?? '/';
@@ -22,31 +28,49 @@ class Router
         // debuguear($urlActual);
 
         if ($metodo === 'GET') {
-            
+
             $fn = $this->rutasGET[$urlActual] ?? null;
-            // debuguear($fun);
+           
+        } else{
+            $fn = $this->rutasPOST[$urlActual] ?? null;
         }
-        // debuguear($fn);
+        
 
         if ($fn) {
             // La URL existe y hay una función asociada
             call_user_func($fn, $this);
         } else {
-            echo 'Página no encontrada';//test
+            echo 'Página no encontrada'; //test
         }
     }
 
     //Muestra una vista
     public function render($view, $datos = [])
     {
-        
         foreach ($datos as $key => $value) {
-            $$key = $value;//$$key variable de variables
+            $$key = $value; // Variables dinámicas
         }
-        ob_start();//guarda el contenido en un buffer
-        include __DIR__ . "/../views/$view.php";
-        $contenido = ob_get_clean();//limpia el buffer
 
-        include __DIR__ . "/../views/layout.php";
+        // Generar contenido dinámico de la vista
+        ob_start();
+        $viewPath = __DIR__ . "/../views/$view.php";
+
+        if (file_exists($viewPath)) {
+            include $viewPath;
+        } else {
+            echo "Error: La vista '$view' no existe.";
+            return;
+        }
+
+        $contenido = ob_get_clean();
+
+        // Incluir el layout
+        $layoutPath = __DIR__ . "/../views/layout.php";
+
+        if (file_exists($layoutPath)) {
+            include $layoutPath;
+        } else {
+            echo "Error: El layout no existe.";
+        }
     }
 }
