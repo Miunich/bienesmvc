@@ -6,6 +6,7 @@ use Model\Propiedad;
 use Model\vendedor;
 use Intervention\Image\ImageManager as Image;
 use Intervention\Image\Drivers\GD\Driver;
+
 $db = conectarDB();
 
 // Conectar a la base de datos
@@ -30,10 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //Revisar que el arreglo de errores este vacio
     if (empty($errores)) {
         $manager = new Image(Driver::class);
-        
     }
 }
 ?>
+
 <fieldset>
     <legend>Información General</legend>
 
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <input type="number" id="precio" name="precio" placeholder="Precio Propiedad" value="<?php echo s($propiedad->precio); ?>">
 
     <label for="imagen">Imagen:</label>
-    <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen">
+    <input type="file" id="imagen" accept="image/jpeg, image/png, image/jpg" name="imagen">
 
     <label for="descripcion">Descripción:</label>
     <textarea id="descripcion" name="descripcion"><?php echo s($propiedad->descripcion); ?></textarea>

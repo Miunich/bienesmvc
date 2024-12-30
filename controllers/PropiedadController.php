@@ -8,6 +8,7 @@ use Model\vendedor;
 use Intervention\Image\ImageManager as Image;
 use Intervention\Image\Drivers\GD\Driver;
 
+
 class PropiedadController
 {
     public static function index(Router $router)
@@ -32,8 +33,12 @@ class PropiedadController
 
         // Validar los datos de la propiedad
         $errores = $propiedad->validar();
-
+        
+        
         // Verificar que el archivo de imagen fue enviado correctamente
+        // $imagen=$_FILES['imagen'];
+        // debuguear($imagen);
+        
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
             // Validar el tipo de archivo (solo imágenes)
             $tipoArchivo = $_FILES['imagen']['type'];
@@ -42,7 +47,7 @@ class PropiedadController
             }
 
             // Validar el tamaño máximo de la imagen (por ejemplo, 2MB)
-            $tamanoMaximo = 2 * 1024 * 1024; // 2MB
+            $tamanoMaximo = 8 * 1024 * 1024; // 8MB
             if ($_FILES['imagen']['size'] > $tamanoMaximo) {
                 $errores[] = 'El archivo es demasiado grande. El tamaño máximo permitido es 2MB.';
             }
@@ -52,8 +57,7 @@ class PropiedadController
                 // Generar un nombre único para la imagen
                 $nombreImagen = uniqid() . ".jpg";
 
-                // Definir la carpeta de imágenes
-                define('CARPETA_IMAGENES', __DIR__ . '/../public/imagenes/');
+                
 
                 // Crear la carpeta si no existe
                 if (!is_dir(CARPETA_IMAGENES)) {
@@ -78,7 +82,7 @@ class PropiedadController
         if (empty($errores)) {
             $resultado = $propiedad->guardar();
             if ($resultado) {
-                header('Location: /admin?resultado=1');
+                header('Location: /public/admin');
                 exit;
             }
         }
@@ -97,5 +101,10 @@ class PropiedadController
     public static function actualizar()
     {
         echo 'Actualizar Propiedad';
+    }
+
+    public static function printDir(){
+        // define('CARPETA_IMAGENES', __DIR__ . '/../public/imagenes');
+        echo CARPETA_IMAGENES;
     }
 }

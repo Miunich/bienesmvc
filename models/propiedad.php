@@ -107,9 +107,9 @@ class propiedad{
         if(!$this->vendedor_id){
             self::$errores[] = "Debes añadir un vendedor";
         }
-        if(!$this->imagen){
-            self::$errores[] = "Debes añadir una imagen";
-        }
+        // if(!$this->imagen){
+        //     self::$errores[] = "Debes añadir una imagen";
+        // }
         return self::$errores;
     }
 
