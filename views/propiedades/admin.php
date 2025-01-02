@@ -1,7 +1,8 @@
 <main class="contenedor seccion">
     <h1>Administrador de Bienes Raíces</h1>
     <?php
-    $resultado = $resultado ?? null;
+    // Capturar el valor de 'resultado' desde la URL
+    $resultado = $_GET['resultado'] ?? null;
 
     if ($resultado) {
         if ($resultado == '1'): ?>
@@ -18,7 +19,7 @@
             <p class="alerta exito">Vendedor creado correctamente</p>
         <?php endif;
     }
-?>
+    ?>
 
 
     <a href="/public/crear" class="boton boton-verde"> Nueva Propiedad</a>
@@ -50,7 +51,7 @@
                             <input type="hidden" name="tipo" value="propiedad">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
-                        <a href="propiedades/actualizar.php?id=<?php echo $propiedad->id; ?>" class="boton-amarillo-block">Actualizar</a>
+                        <a href="/public/actualizar?id=<?php echo htmlspecialchars($propiedad->id); ?>" class="boton-amarillo-block">Actualizar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

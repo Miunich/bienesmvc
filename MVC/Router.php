@@ -27,14 +27,15 @@ class Router
 
         // debuguear($urlActual);
 
-        if ($metodo === 'GET') {
+        // Extraer la ruta sin parámetros
+        $path = parse_url($urlActual, PHP_URL_PATH);
 
-            $fn = $this->rutasGET[$urlActual] ?? null;
-           
-        } else{
-            $fn = $this->rutasPOST[$urlActual] ?? null;
+        if ($metodo === 'GET') {
+            $fn = $this->rutasGET[$path] ?? null;
+        } else {
+            $fn = $this->rutasPOST[$path] ?? null;
         }
-        
+
 
         if ($fn) {
             // La URL existe y hay una función asociada

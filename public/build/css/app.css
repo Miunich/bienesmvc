@@ -330,6 +330,10 @@ h4 {
 .dark-mode {
     background-color: #1a1a1a
 }
+body.dark-mode td {
+      /* Fondo blanco para las celdas */
+    color: #fff;              /* Texto en negro */
+}
 
 .dark-mode p {
     color: #fff
