@@ -26,7 +26,7 @@ class Router
         $metodo = $_SERVER['REQUEST_METHOD'];
 
         // debuguear($urlActual);
-
+        //SOLUCION AL PROBLEMA DE LAS RUTAS CON PARAMETROS
         // Extraer la ruta sin parámetros
         $path = parse_url($urlActual, PHP_URL_PATH);
 
@@ -74,4 +74,5 @@ class Router
             echo "Error: El layout no existe.";
         }
     }
+    
 }

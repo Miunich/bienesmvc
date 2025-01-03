@@ -99,17 +99,38 @@ class PropiedadController
 
 
     public static function actualizar(Router $router)
-{
-    $id = $_GET['id'] ?? null;
+    {
+        // var_dump($_SERVER['REQUEST_METHOD']); // Tipo de solicitud (esperado: 'POST')
+        // var_dump($_SERVER['REQUEST_URI']);   // URI de la solicitud
+        // var_dump($_POST);                    // Datos enviados (esperado: datos del formulario)
+        // exit;
 
-        if (!$id) {
-            echo "ID no válido";
-            return;
-        }else{
-            echo "ID válido";
-            return;
+        $id = validarORedireccionar('/admin');
+        $propiedad = Propiedad::find($id);
+
+        $errores = Propiedad::getErrores();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // var_dump($_POST); // Inspecciona los datos enviados
+            $args = $_POST['propiedad'] ?? []; // Usa un arreglo vacío si no está definido
+            $propiedad->sincronizar($args);
+            $errores = $propiedad->validar();
+
+            // if (empty($errores)) {
+            //     $propiedad->guardar();
+            //     header('Location: /admin?resultado=2');
+            //     exit;
+            // }
         }
-}
+
+        $router->render('propiedades/actualizar', [
+            'propiedad' => $propiedad,
+            'errores' => $errores
+        ]);
+    }
+
+
+
 
 
 
