@@ -25,7 +25,7 @@ class PropiedadController
     {
         $propiedad = new Propiedad();
         $vendedores = vendedor::all();
-        $errores = Propiedad::getErrores();
+        $errores = $propiedad->validar(); 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Crear instancia de Propiedad con los datos enviados
@@ -108,7 +108,9 @@ class PropiedadController
         $id = validarORedireccionar('/admin');
         $propiedad = Propiedad::find($id);
 
-        $errores = Propiedad::getErrores();
+        // $errores = Propiedad::getErrores();
+        $errores = $propiedad->getErrores(); // Cambiado de 'Propiedad::getErrores()' a '$propiedad->getErrores()'
+
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // var_dump($_POST); // Inspecciona los datos enviados
@@ -116,12 +118,41 @@ class PropiedadController
             $propiedad->sincronizar($args);
             $errores = $propiedad->validar();
 
-            // if (empty($errores)) {
-            //     $propiedad->guardar();
-            //     header('Location: /admin?resultado=2');
-            //     exit;
-            // }
+            
+            if (empty($errores)) {
+                $propiedad->guardar();
+                debuguear($propiedad);
+                header('Location: /public/admin?resultado=2');
+                exit;
+            }
         }
+        // if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        //     // Si la solicitud es GET, mostrar los datos existentes en la base de datos
+        //     $id = $_GET['id'] ?? null;  // Obtener el ID de la propiedad desde la URL
+        //     if (!$id) {
+        //         header('Location: /admin');  // Si no se pasa un ID, redirigir al listado
+        //         exit;
+        //     }
+    
+        //     $propiedad = Propiedad::find($id);  // Buscar la propiedad por su ID
+        //     if (!$propiedad) {
+        //         header('Location: /admin');  // Si no se encuentra la propiedad, redirigir
+        //         exit;
+        //     }
+    
+        //     // Mostrar los datos de la propiedad en el formulario
+        //     // include __DIR__ . '/vistaActualizar.php';  // Incluir la vista para mostrar el formulario de actualización
+        //     $args = $_GET['propiedad'] ?? []; // Usa un arreglo vacío si no está definido
+        //     $propiedad->sincronizar($args);
+        //     $errores = $propiedad->validar();
+
+        //     if (empty($errores)) {
+        //         $propiedad->guardar();
+        //         // debuguear($propiedad);
+        //         header('Location: /public/admin?resultado=2');
+        //         exit;
+        //     }
+        // }
 
         $router->render('propiedades/actualizar', [
             'propiedad' => $propiedad,

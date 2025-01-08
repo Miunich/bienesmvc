@@ -8,7 +8,8 @@ class propiedad{
     protected static $columnasDB = ['id', 'titulo', 'precio', 'imagen', 'descripcion', 'habitaciones', 'wc', 'estacionamiento', 'creado', 'vendedor_id'];
 
     //Errores
-    protected static $errores = [];
+    // protected static $errores = [];
+    public $errores = [];
 
     public $id;
     public $titulo;
@@ -80,37 +81,38 @@ class propiedad{
         return $sanitizado;
     }
     
+    
     //Validacion
-    public static function getErrores(){
-        return self::$errores;
+    public function getErrores() {
+        return $this->errores;  // Accedemos a la propiedad de instancia
     }
 
     public function validar(){
         if(!$this->titulo){
-            self::$errores[] = "Debes añadir un titulo";
+            $this->errores[] = "Debes añadir un titulo";
         }
         if(!$this->precio){
-            self::$errores[] = "Debes añadir un precio";
+            $this->errores[] = "Debes añadir un precio";
         }
         if(!$this->descripcion){
-            self::$errores[] = "Debes añadir una descripcion";
+            $this->errores[] = "Debes añadir una descripcion";
         }
         if(!$this->habitaciones){
-            self::$errores[] = "Debes añadir un numero de habitaciones";
+            $this->errores[] = "Debes añadir un numero de habitaciones";
         }
         if(!$this->wc){
-            self::$errores[] = "Debes añadir un numero de baños";
+            $this->errores[] = "Debes añadir un numero de baños";
         }
         if(!$this->estacionamiento){
-            self::$errores[] = "Debes añadir un numero de estacionamientos";
+            $this->errores[] = "Debes añadir un numero de estacionamientos";
         }
         if(!$this->vendedor_id){
-            self::$errores[] = "Debes añadir un vendedor";
+            $this->errores[] = "Debes añadir un vendedor";
         }
         // if(!$this->imagen){
         //     self::$errores[] = "Debes añadir una imagen";
         // }
-        return self::$errores;
+        return $this->errores;
     }
 
     public function setImagen($imagen){
