@@ -61,6 +61,29 @@ class propiedad{
 
         // debuguear($resultado);
     }
+    public function actualizar() {
+        // Sanitizar los datos
+        $atributos = $this->sanitizarAtributos();
+        
+        echo "Actualizado en la base de datos";
+        // Crear la consulta SQL para actualizar
+        $valores = [];
+        foreach ($atributos as $key => $value) {
+            $valores[] = "$key = '$value'";
+        }
+    
+        $query = "UPDATE propiedades SET ";
+        $query .= join(', ', $valores);
+        $query .= " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
+    
+        
+
+        // Ejecutar la consulta
+        $resultado = self::$db->query($query);
+    
+        return $resultado;
+    }
+    
     //Identificar y unir los atributos de la base de datos
     public function atributos(){
         $atributos = [];

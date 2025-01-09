@@ -25,7 +25,7 @@ class PropiedadController
     {
         $propiedad = new Propiedad();
         $vendedores = vendedor::all();
-        $errores = $propiedad->validar(); 
+        $errores = $propiedad->validar();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Crear instancia de Propiedad con los datos enviados
@@ -111,48 +111,69 @@ class PropiedadController
         // $errores = Propiedad::getErrores();
         $errores = $propiedad->getErrores(); // Cambiado de 'Propiedad::getErrores()' a '$propiedad->getErrores()'
 
-
+        // debuguear($propiedad);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // var_dump($_POST); // Inspecciona los datos enviados
             $args = $_POST['propiedad'] ?? []; // Usa un arreglo vacío si no está definido
             $propiedad->sincronizar($args);
             $errores = $propiedad->validar();
+            //imagen actualizada
+            // Verificar si se ha subido una nueva imagen
+            if (isset($_FILES['propiedad']['tmp_name']['imagen']) && $_FILES['propiedad']['error']['imagen'] === UPLOAD_ERR_OK) {
+                // Validar el tipo de archivo (solo imágenes)
+                $tipoArchivo = $_FILES['propiedad']['type']['imagen'];
+                if (strpos($tipoArchivo, 'image') === false) {
+                    $errores[] = 'El archivo no es una imagen válida.';
+                }
 
-            
+                // Validar el tamaño máximo de la imagen (por ejemplo, 8MB)
+                $tamanoMaximo = 8 * 1024 * 1024; // 8MB
+                if ($_FILES['propiedad']['size']['imagen'] > $tamanoMaximo) {
+                    $errores[] = 'El archivo es demasiado grande. El tamaño máximo permitido es 8MB.';
+                }
+
+                // Si no hay errores, procesar la nueva imagen
+                if (empty($errores)) {
+                    // Generar un nombre único para la imagen
+                    $nombreImagen = uniqid() . ".jpg";
+
+                    // Crear la carpeta si no existe
+                    if (!is_dir(CARPETA_IMAGENES)) {
+                        mkdir(CARPETA_IMAGENES, 0755, true);
+                    }
+
+                    // Procesar y redimensionar la imagen
+                    $manager = new Image(Driver::class);
+                    $imagen = $manager->read($_FILES['propiedad']['tmp_name']['imagen'])->cover(800, 600);
+
+                    // Guardar la imagen en la carpeta definida
+                    $imagen->save(CARPETA_IMAGENES . $nombreImagen);
+
+                    // Eliminar la imagen anterior, si existe
+                    if ($propiedad->imagen && file_exists(CARPETA_IMAGENES . $propiedad->imagen)) {
+                        unlink(CARPETA_IMAGENES . $propiedad->imagen);
+                    }
+
+                    // Asignar el nombre de la nueva imagen a la propiedad
+                    $propiedad->setImagen($nombreImagen);
+                }
+            }
+
+            // Si no se sube una nueva imagen, mantener la imagen actual
+            if (empty($_FILES['propiedad']['tmp_name']['imagen']) && $propiedad->imagen) {
+                $propiedad->setImagen($propiedad->imagen);
+            }
+            //imagen actualizada
+
+
             if (empty($errores)) {
-                $propiedad->guardar();
-                debuguear($propiedad);
-                header('Location: /public/admin?resultado=2');
-                exit;
+                $resultado = $propiedad->actualizar(); // Usar el método actualizar
+                if ($resultado) {
+                    header('Location: /public/admin?resultado=2');
+                    exit;
+                }
             }
         }
-        // if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        //     // Si la solicitud es GET, mostrar los datos existentes en la base de datos
-        //     $id = $_GET['id'] ?? null;  // Obtener el ID de la propiedad desde la URL
-        //     if (!$id) {
-        //         header('Location: /admin');  // Si no se pasa un ID, redirigir al listado
-        //         exit;
-        //     }
-    
-        //     $propiedad = Propiedad::find($id);  // Buscar la propiedad por su ID
-        //     if (!$propiedad) {
-        //         header('Location: /admin');  // Si no se encuentra la propiedad, redirigir
-        //         exit;
-        //     }
-    
-        //     // Mostrar los datos de la propiedad en el formulario
-        //     // include __DIR__ . '/vistaActualizar.php';  // Incluir la vista para mostrar el formulario de actualización
-        //     $args = $_GET['propiedad'] ?? []; // Usa un arreglo vacío si no está definido
-        //     $propiedad->sincronizar($args);
-        //     $errores = $propiedad->validar();
-
-        //     if (empty($errores)) {
-        //         $propiedad->guardar();
-        //         // debuguear($propiedad);
-        //         header('Location: /public/admin?resultado=2');
-        //         exit;
-        //     }
-        // }
 
         $router->render('propiedades/actualizar', [
             'propiedad' => $propiedad,
