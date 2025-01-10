@@ -37,43 +37,6 @@ if (!$resultadoVendedores) {
     die("Error en la consulta de vendedores: " . mysqli_error($db));
 }
 
-//Ejecutar el codigo despues de que el usuario envie el formulario
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     // Sincronizar el objeto en memoria con lo que el usuario escribió
-//     $args = $_POST['propiedad'];
-//     $propiedad->sincronizar($args);
-
-//     // Validación
-//     $errores = $propiedad->validar();
-
-//     // Revisar que el arreglo de errores esté vacío
-//     if (empty($errores)) {
-//         // Crear carpeta
-//         $carpetaImagenes = CARPETA_IMAGENES;
-//         if (!is_dir($carpetaImagenes)) {
-//             mkdir($carpetaImagenes);
-//         }
-
-//         // Generar un nombre único para cada imagen
-//         $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
-
-//         // Setear la imagen
-//         if ($_FILES['propiedad']['tmp_name']['imagen']) {
-//             $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800, 600);
-//             $propiedad->setImagen($nombreImagen);
-//             $image->save($carpetaImagenes . $nombreImagen);
-//         }
-
-//         // Guardar en la base de datos
-//         $propiedad->guardar();
-
-//         // Redirección con URL válida
-//         header("Location: /admin?resultado=1");
-//         exit;
-//     }
-// }
-
-
 ?>
 
 <fieldset>

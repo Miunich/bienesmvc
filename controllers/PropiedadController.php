@@ -181,10 +181,39 @@ class PropiedadController
         ]);
     }
 
-
-
-
-
+    public static function eliminar(Router $router) {
+        // var_dump($_SERVER['REQUEST_METHOD']);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Validar id
+            $id = $_POST['id'];
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+    
+            if ($id) {
+                $propiedad = Propiedad::find($id);
+                if ($propiedad) {
+                    $tipo = $_POST['tipo'];
+                    if (validarTipoContenido($tipo)) {
+                        $resultado = $propiedad->eliminar();
+    
+                        if ($resultado) {
+                            header('Location: /public/admin?resultado=3');
+                            exit;
+                        } else {
+                            echo "Error al eliminar la propiedad.";
+                        }
+                    }
+                } else {
+                    echo "Propiedad no encontrada.";
+                }
+            } else {
+                echo "ID inválido.";
+            }
+        }
+        $router->render('propiedades/eliminar', [
+            'propiedad' => $propiedad
+        ]);
+    }
+    
 
     public static function printDir()
     {

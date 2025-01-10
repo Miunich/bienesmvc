@@ -83,6 +83,23 @@ class propiedad{
     
         return $resultado;
     }
+
+    public function eliminar() {
+        // Verificar que el ID esté definido
+        // if (!isset($this->id)) {
+        //     throw new Exception("El ID de la propiedad es obligatorio para eliminar.");
+        // }
+    
+        // Crear la consulta SQL para eliminar el registro
+        $query = "DELETE FROM propiedades WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
+        
+        // Ejecutar la consulta
+        $resultado = self::$db->query($query);
+        
+        // Retornar el resultado de la operación
+        return $resultado;
+    }
+    
     
     //Identificar y unir los atributos de la base de datos
     public function atributos(){
