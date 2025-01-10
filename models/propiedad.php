@@ -134,9 +134,9 @@ class propiedad{
         if(!$this->precio){
             $this->errores[] = "Debes añadir un precio";
         }
-        if(!$this->descripcion){
-            $this->errores[] = "Debes añadir una descripcion";
-        }
+        // if(!$this->descripcion){
+        //     $this->errores[] = "Debes añadir una descripcion";
+        // }
         if(!$this->habitaciones){
             $this->errores[] = "Debes añadir un numero de habitaciones";
         }

@@ -14,10 +14,12 @@ class PropiedadController
     public static function index(Router $router)
     {
         $propiedades = Propiedad::all();
+        $vendedores = vendedor::all();
         $resultado = null;
         $router->render('propiedades/admin', [
             'propiedades' => $propiedades,
-            'resultado' => $resultado
+            'resultado' => $resultado,
+            'vendedores' => $vendedores
         ]);
     }
 
@@ -30,15 +32,16 @@ class PropiedadController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Crear instancia de Propiedad con los datos enviados
             $propiedad = new Propiedad($_POST);
+            $args = $_POST['propiedad'] ?? []; // Usa un arreglo vacío si no está definido
+            $propiedad->sincronizar($args);
 
             // Validar los datos de la propiedad
             $errores = $propiedad->validar();
+            // debuguear($propiedad);
 
 
             // Verificar que el archivo de imagen fue enviado correctamente
-            // $imagen=$_FILES['imagen'];
-            // debuguear($imagen);
-
+            
             if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
                 // Validar el tipo de archivo (solo imágenes)
                 $tipoArchivo = $_FILES['imagen']['type'];

@@ -17,7 +17,7 @@
             <p class="alerta exito">Vendedor actualizado correctamente</p>
         <?php elseif ($resultado == '6'): ?>
             <p class="alerta exito">Vendedor creado correctamente</p>
-        <?php endif;
+    <?php endif;
     }
     ?>
 
@@ -56,5 +56,39 @@
                 </tr>
             <?php endforeach; ?>
         </tbody>
-    </table>
+        </table>
+        <!-- test de vendedores -->
+        <h2>Vendedores</h2>
+
+        <table class="propiedades">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody><!--Mostrar los resultados-->
+                <?php foreach ($vendedores as $vendedor): ?>
+                    <tr>
+                        <td><?php echo $vendedor->vendedor_id; ?></td>
+                        <!-- quiero mostrar el nombre y apellido del vendedor de una sola vez
+                  -->
+                        <td><?php echo $vendedor->nombre . " " . $vendedor->apellido; ?></td>
+
+                        <td> <!-- Acciones -->
+                            <form action="" method="POST" class="w-100">
+                                <input type="hidden" name="id" value="<?= $vendedor->vendedor_id; ?>">
+                                <input type="hidden" name="tipo" value="vendedor">
+                                <input type="submit" class="boton-rojo-block" value="Eliminar">
+                            </form>
+                            <a href="vendedores/actualizar.php?id=<?php echo $vendedor->vendedor_id; ?>" class="boton-amarillo-block">Actualizar</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+
+            <!-- test de vendedores -->
+        </table>
 </main>
