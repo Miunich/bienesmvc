@@ -1,6 +1,8 @@
+
 <?php
 
 // require_once '../../includes/app.php';
+
 
 use Model\Propiedad;
 use Model\vendedor;
@@ -49,7 +51,7 @@ if (!$resultadoVendedores) {
     <input type="number" id="precio" name="propiedad[precio]" placeholder="Precio Propiedad" value="<?php echo s($propiedad->precio); ?>">
 
     <label for="imagen">Imagen:</label>
-    <input type="file" id="imagen" accept="image/jpeg, image/png, image/jpg" name="imagen">
+    <input type="file" id="imagen" accept="image/jpeg, image/png, image/jpg" name="propiedad[imagen]">
 
     <label for="descripcion">Descripción:</label>
     <textarea id="descripcion" name="propiedad[descripcion]"><?php echo s($propiedad->descripcion); ?></textarea>

@@ -22,8 +22,8 @@
     ?>
 
 
-    <a href="/public/crear" class="boton boton-verde"> Nueva Propiedad</a>
-    <a href="/admin/vendedores/crear.php" class="boton boton-amarillo"> Nuevo(a) vendedor</a>
+    <a href="/public/propiedad/crear" class="boton boton-verde"> Nueva Propiedad</a>
+    <a href="/public/vendedores/crear" class="boton boton-amarillo"> Nuevo(a) vendedor</a>
 
     <h2>Propiedades</h2>
     <table class="propiedades">
@@ -46,12 +46,12 @@
                     <td> <img src="/public/imagenes/<?php echo $propiedad->imagen; ?>" alt="" class="imagen-tabla"></td>
                     <td>$ <?php echo $propiedad->precio; ?></td>
                     <td>
-                        <form action="/public/eliminar" method="POST" class="w-100">
+                        <form action="/public/propiedad/eliminar" method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?= $propiedad->id; ?>">
                             <input type="hidden" name="tipo" value="propiedad">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
-                        <a href="/public/actualizar?id=<?php echo htmlspecialchars($propiedad->id); ?>" class="boton-amarillo-block">Actualizar</a>
+                        <a href="/public/propiedad/actualizar?id=<?php echo htmlspecialchars($propiedad->id); ?>" class="boton-amarillo-block">Actualizar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
