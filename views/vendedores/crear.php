@@ -1,5 +1,5 @@
 <main class="contenedor seccion">
-    <h1>Ingresar Vendedor</h1>
+    <h1>Ingresar Vendedor(a)</h1>
 
     <a href="/public/admin" class="boton boton-verde">Volver</a>
 
@@ -11,7 +11,7 @@
     <?php endforeach; ?>
 
     <!-- Formulario -->
-    <form action="/admin/vendedores/crear.php" class="formulario" method="POST" enctype="multipart/form-data">
+    <form action="/public/vendedores/crear" class="formulario" method="POST" enctype="multipart/form-data">
         <?php include __DIR__ . '/formulario.php'; ?>
         <input type="submit" value="Registrar Vendedor(a)" class="boton boton-verde">
     </form>

@@ -88,3 +88,4 @@ function validarORedireccionar($url){
     }
     return $id;
 }
+

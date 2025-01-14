@@ -78,12 +78,12 @@
                         <td><?php echo $vendedor->nombre . " " . $vendedor->apellido; ?></td>
 
                         <td> <!-- Acciones -->
-                            <form action="" method="POST" class="w-100">
+                            <form action="/public/vendedores/eliminar" method="POST" class="w-100">
                                 <input type="hidden" name="id" value="<?= $vendedor->vendedor_id; ?>">
                                 <input type="hidden" name="tipo" value="vendedor">
                                 <input type="submit" class="boton-rojo-block" value="Eliminar">
                             </form>
-                            <a href="vendedores/actualizar.php?id=<?php echo $vendedor->vendedor_id; ?>" class="boton-amarillo-block">Actualizar</a>
+                            <a href="/public/vendedores/actualizar?id=<?php echo $vendedor->vendedor_id; ?>" class="boton-amarillo-block">Actualizar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
