@@ -234,4 +234,6 @@ class propiedad{
         return $resultado;
     }
 
+    
+
 }

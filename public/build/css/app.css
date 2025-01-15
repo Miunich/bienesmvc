@@ -834,3 +834,15 @@ table.propiedades .imagen-tabla {
 }
 
 /*# sourceMappingURL=app.css.map */
+
+/* Listado propiedades */
+.contenedor-anuncios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px; /* Espacio entre columnas y filas */
+    margin-top: 30px;
+}
+
+
+
+/* Listado propiedades */

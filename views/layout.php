@@ -31,7 +31,7 @@ if(!isset($inicio)){
 
         <div class="contenedor contenido-header">
             <div class="barra">
-                <a href="../../index.php">
+                <a href="/public/">
                     <img src="../../public/build/img/logo.svg" alt="logo">
                 </a>
                 <div class="mobile-menu">
@@ -40,12 +40,12 @@ if(!isset($inicio)){
                 <div class="derecha">
                     <img src="../../public/build/img/dark-mode.svg" alt="dark-mode" class="dark-mode-boton">
                     <nav class="navegacion">
-                        <a href="../../nosotros.php">Nosotros</a>
-                        <a href="../../anuncios.php">Anuncios</a>
-                        <a href="../../blog.php">Blog</a>
-                        <a href="../../contacto.php">Contacto</a>
+                        <a href="/public/nosotros">Nosotros</a>
+                        <a href="/public/propiedades">Anuncios</a>
+                        <a href="/public/blog">Blog</a>
+                        <a href="/public/contacto">Contacto</a>
                         <?php if ($auth) : ?>
-                            <a href="../../cerrar-sesion.php">Cerrar Sesión</a>
+                            <a href="/public/cerrar-sesion">Cerrar Sesión</a>
                         <?php endif; ?>
                     </nav>
                 </div>
@@ -62,7 +62,7 @@ if(!isset($inicio)){
     <footer class="footer seccion">
         <div class="contenedor contenedor-footer">
             <nav class="navegacion">
-                <a href="nosotros.php">Nosotros</a>
+                <a href="nosotros">Nosotros</a>
                 <a href="anuncios.php">Anuncios</a>
                 <a href="blog.php">Blog</a>
                 <a href="contacto.php">Contacto</a>
