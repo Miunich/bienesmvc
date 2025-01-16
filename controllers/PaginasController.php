@@ -49,8 +49,9 @@ class PaginasController
         $router->render('paginas/entrada');
     }
     
-    public static function contacto()
+    public static function contacto(Router $router)
     {
-        echo 'Desde la página de contacto';
+        $router->render('paginas/contacto');
     }
+    
 }
