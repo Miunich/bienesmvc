@@ -32,7 +32,7 @@
                     </li>
                 </ul>
 
-                <a href="anuncio.php?id=<?php echo $propiedad->id; ?>" class="boton boton-amarillo-block">
+                <a href="/public/propiedad?id=<?php echo $propiedad->id; ?>" class="boton boton-amarillo-block">
                     Ver Propiedad
                 </a>
             </div><!--Contenido-anuncio-->

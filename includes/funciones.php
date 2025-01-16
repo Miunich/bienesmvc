@@ -80,7 +80,7 @@ function mostrarNotificacion($codigo){
     return $mensaje;
 }
 function validarORedireccionar($url){
-    $id = $_GET["id"];
+    $id = $_GET['id'] ?? null;
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
     if (!$id) {
