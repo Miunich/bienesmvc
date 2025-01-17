@@ -91,6 +91,7 @@ class PaginasController
 
             }else{
                 //Es email, entonces agregamos el campo de email
+                $contenido .=
                 $contenido .= '<p>Correo: ' . $respuestas['email'] . '</p>';
             }
 
