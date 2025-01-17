@@ -84,7 +84,17 @@ class PaginasController
             $contenido = '<html>';
             $contenido .= '<p>Tienes un nuevo mensaje</p>';
             $contenido .= '<p>Nombre: ' . $respuestas['nombre'] . '</p>';
-            $contenido .= '<p>Correo: ' . $respuestas['email'] . '</p>';
+            
+
+            //Enviar de forma condicional algunos campos de email o teléfono
+            if($respuestas['contacto'] === 'telefono'){
+
+            }else{
+                //Es email, entonces agregamos el campo de email
+                $contenido .= '<p>Correo: ' . $respuestas['email'] . '</p>';
+            }
+
+            $contenido .= '<p>Teléfono: ' . $respuestas['telefono'] . '</p>';
             $contenido .= '<p>Mensaje: ' . $respuestas['mensaje'] . '</p>';
             $contenido .= '<p>Vende o Compra: ' . $respuestas['tipo'] . '</p>';
             $contenido .= '<p>Precio o Presupuesto: $' . $respuestas['precio'] . '</p>';
