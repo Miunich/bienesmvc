@@ -16,7 +16,7 @@
             <input type="text" id="nombre" placeholder="Tu Nombre" name="contacto[nombre]" required>
 
             <label for="correo">Correo:</label>
-            <input type="email" id="correo" placeholder="Tu Correo" name="contacto[correo]" required>
+            <input type="email" id="correo" placeholder="Tu Correo" name="contacto[email]" required>
 
             <label for="telefono">Teléfono:</label>
             <input type="tel" id="telefono" placeholder="Tu Teléfono" name="contacto[telefono]">
@@ -45,10 +45,10 @@
             <p>¿Cómo desea ser contactado?</p>
             <div class="forma-contacto">
                 <label for="contactar-telefono">Teléfono</label>
-                <input type="radio" name="contacto" id="contactar-telefono" value="telefono" name="contacto[contacto]" required>
+                <input type="radio" id="contactar-telefono" value="telefono" name="contacto[contacto]" required>
 
                 <label for="contactar-email">E-mail</label>
-                <input type="radio" name="contacto" id="contactar-email" value="email"name="contacto[contacto]" required>
+                <input type="radio"  id="contactar-email" value="email"name="contacto[contacto]" required>
             </div>
             <p> Si eligió teléfono, elija la fecha y la hora para ser contactado</p>
 

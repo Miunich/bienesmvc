@@ -330,10 +330,6 @@ h4 {
 .dark-mode {
     background-color: #1a1a1a
 }
-body.dark-mode td {
-      
-    color: #fff;              /* Texto en blanco */
-}
 
 .dark-mode p {
     color: #fff
@@ -834,15 +830,3 @@ table.propiedades .imagen-tabla {
 }
 
 /*# sourceMappingURL=app.css.map */
-
-/* Listado propiedades */
-.contenedor-anuncios {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px; /* Espacio entre columnas y filas */
-    margin-top: 30px;
-}
-
-
-
-/* Listado propiedades */
