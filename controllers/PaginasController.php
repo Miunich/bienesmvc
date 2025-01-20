@@ -52,6 +52,8 @@ class PaginasController
     
     public static function contacto(Router $router)
     {
+        $mensaje = null;
+
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 
@@ -107,12 +109,13 @@ class PaginasController
             $mail->Body = $contenido;
             // Enviar el email
             if($mail->send()){
-                echo "Mensaje enviado";
+                $mensaje = "Mensaje enviado correctamente";
             } else {
-                echo "No se pudo enviar el mensaje";
+                $mensaje = "No se pudo enviar el mensaje";
             }
         }
         $router->render('paginas/contacto',[
+            'mensaje' => $mensaje
 
         ]);
     }

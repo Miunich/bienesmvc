@@ -45,7 +45,7 @@ if(!isset($inicio)){
                         <a href="/public/blog">Blog</a>
                         <a href="/public/contacto">Contacto</a>
                         <?php if ($auth) : ?>
-                            <a href="/public/cerrar-sesion">Cerrar Sesión</a>
+                            <a href="/public/logout">Cerrar Sesión</a>
                         <?php endif; ?>
                     </nav>
                 </div>
@@ -69,7 +69,7 @@ if(!isset($inicio)){
             </nav>
         </div>
 
-        <p class="copyright">Todos los derechos reservados</p>
+        <p class="copyright"> Todos los derechos reservados 2025 &copy;</p>
     </footer>
     <script src="../public/build/js/bundle.min.js"></script>
 </body>
